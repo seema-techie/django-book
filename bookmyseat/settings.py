@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-DATABASES['default'] = dj_database_url.parse('postgresql://django_bookmyshow_apwq_user:4M727ngBgRxdZcCpFbTGKcHoVYc3dIv8@dpg-d18j1nqdbo4c739ompn0-a.oregon-postgres.render.com/django_bookmyshow_apwq')
+DATABASES['default'] = dj_database_url.parse('postgresql://django_bookmyshow_cex6_user:ZBip2KrW1fYPEcdK9uVJ2to202mBtxD7@dpg-d2i4vr3uibrs73dtrrig-a.oregon-postgres.render.com/django_bookmyshow_cex6')
 
 
 # 
