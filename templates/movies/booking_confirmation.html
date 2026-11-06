@@ -1,0 +1,84 @@
+{% extends "users/basic.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card shadow mx-auto" style="max-width: 650px;">
+
+        <div class="card-body text-center p-4">
+
+            <div class="text-success mb-3">
+                <i class="fas fa-check-circle fa-4x"></i>
+            </div>
+
+            <h2 class="text-success">Booking Confirmed!</h2>
+
+            <p class="text-muted">
+                Your movie seats have been successfully booked.
+            </p>
+
+            <hr>
+
+            <h3>{{ movie.name }}</h3>
+
+            {% if movie.image %}
+                <img
+                    src="{{ movie.image.url }}"
+                    alt="{{ movie.name }}"
+                    class="img-fluid rounded mb-3"
+                    style="max-height: 220px;"
+                >
+            {% endif %}
+
+            <div class="text-start mt-4">
+
+                <p>
+                    <strong>Theater:</strong>
+                    {{ theater.name }}
+                </p>
+
+                <p>
+                    <strong>Show Date & Time:</strong>
+                    {{ theater.time|date:"F d, Y - h:i A" }}
+                </p>
+
+                <p>
+                    <strong>Booking Date:</strong>
+                    {{ bookings.first.booked_at|date:"F d, Y - h:i A" }}
+                </p>
+
+                <p><strong>Selected Seats:</strong></p>
+
+                {% for booking in bookings %}
+                    <span class="badge bg-success p-2 me-1 mb-2">
+                        {{ booking.seat.seat_number }}
+                    </span>
+                {% endfor %}
+
+                <hr>
+
+                <p>
+                    <strong>Booking Reference:</strong>
+                    {% for booking in bookings %}
+                        #{{ booking.id }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+
+            </div>
+
+            <div class="mt-4">
+                <a href="{% url 'profile' %}" class="btn btn-primary">
+                    View My Bookings
+                </a>
+
+                <a href="{% url 'movie_list' %}" class="btn btn-outline-secondary">
+                    Browse Movies
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

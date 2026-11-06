@@ -1,0 +1,64 @@
+
+{% extends "users/basic.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+
+            <h3>{{ theater.movie.name }}</h3>
+            <p>{{ theater.name }} | {{ theater.time }}</p>
+
+            {% if error %}
+                <div class="alert alert-danger">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <h4 class="mt-4">Select Your Seats</h4>
+
+            <form method="POST" action="">
+                {% csrf_token %}
+
+                {% for seat in seats %}
+                    <div class="form-check mb-2">
+
+                        {% if seat.is_booked %}
+                            <input type="checkbox" disabled>
+                            <label>
+                                {{ seat.seat_number }} - Already Booked
+                            </label>
+                        {% else %}
+                            <input
+                                type="checkbox"
+                                name="seats"
+                                value="{{ seat.id }}"
+                                id="seat_{{ seat.id }}"
+                                class="form-check-input"
+                            >
+
+                            <label
+                                for="seat_{{ seat.id }}"
+                                class="form-check-label"
+                            >
+                                {{ seat.seat_number }} - Available
+                            </label>
+                        {% endif %}
+
+                    </div>
+                {% empty %}
+                    <p>No seats have been added for this theater.</p>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-success mt-3">
+                    Book Selected Seats
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
